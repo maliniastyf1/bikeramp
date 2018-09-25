@@ -12,6 +12,7 @@ gem 'rails', '~> 5.2.1'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
+gem 'rack-cors'
 
 # grape + jsonapi
 gem 'grape'
@@ -19,6 +20,7 @@ gem 'grape-middleware-logger'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
 gem 'hashie-forbidden_attributes' # to make grape params validation work
+gem 'jsonapi-rb'
 
 group :development, :test do
   gem 'factory_bot_rails'
