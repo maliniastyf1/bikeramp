@@ -1,26 +1,11 @@
 # frozen_string_literal: true
 
 module Bikeramp
-  class Trip < Grape::API
-    prefix :api
-    content_type :json, 'application/vnd.api+json'
-    default_format :json
+  module Trips
+    module Params
+      extend Grape::API::Helpers
 
-    add_swagger_documentation \
-    mount_path: '/docs',
-    add_base_path: true,
-    produces: 'application/vnd.api+json',
-    array_use_braces: true,
-    security_definitions: {
-      api_key: { type: 'basic', name: 'Authorization', in: 'header' }
-    }
-
-    rescue_from ArgumentError, Grape::Exceptions::ValidationErrors, with: -> { Rack::Response.new('invalid value', 422) }
-
-
-    desc "Create a trip"
-    namespace :trips do
-      params do
+      params :trip do
         requires :data, type: Hash do
           requires :attributes, type: Hash do
             requires(
@@ -47,15 +32,6 @@ module Bikeramp
           end
         end
       end
-
-      post do
-
-        ::TripServices::CreateTrip.call(params)
-
-        status :created
-      end
-
-
     end
   end
 end

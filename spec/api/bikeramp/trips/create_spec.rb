@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Bikeramp::Trip, type: :request do
+describe Bikeramp::Trips::Create, type: :request do
   let(:endpoint) { '/api/trips' }
   let(:date) { Date.new(2018, 10, 22) }
   let(:attributes) do
@@ -20,7 +20,7 @@ describe Bikeramp::Trip, type: :request do
 
   before do
     allow(::TripServices::CreateTrip)
-    .to receive(:call).with(params).and_return(:created)
+      .to receive(:call).with(params).and_return(:created)
   end
 
   subject { post endpoint, params: params }
@@ -34,9 +34,9 @@ describe Bikeramp::Trip, type: :request do
       expect(response.body).to eq(response_body.to_json)
     end
 
-    it "runs proper service object" do
+    it 'runs proper service object' do
       expect(::TripServices::CreateTrip)
-      .to receive(:call).with(params).and_return(:created).once
+        .to receive(:call).with(params).and_return(:created).once
       subject
     end
   end
@@ -46,7 +46,7 @@ describe Bikeramp::Trip, type: :request do
     let(:date) { 'invalid value' }
     let(:message) { 'invalid value' }
 
-    it "responds with 422 and proper body" do
+    it 'responds with 422 and proper body' do
       subject
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response.body).to eq(message)
