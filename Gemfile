@@ -20,6 +20,7 @@ gem 'grape-middleware-logger'
 gem 'grape-swagger'
 gem 'grape-swagger-entity'
 gem 'grape-swagger-rails'
+gem 'grape-swagger-representable'
 gem 'hashie-forbidden_attributes' # to make grape params validation work
 gem 'jsonapi-rb'
 

@@ -10,7 +10,6 @@ module Bikeramp
 
     add_swagger_documentation \
       mount_path: '/docs',
-      add_base_path: true,
       produces: 'application/vnd.api+json',
       array_use_braces: true,
       security_definitions: {
