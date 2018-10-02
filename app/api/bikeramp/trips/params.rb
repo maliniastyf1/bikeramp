@@ -20,7 +20,7 @@ module Bikeramp
             )
             requires(
               :price,
-              type: Integer,
+              type: BigDecimal,
               desc: 'Package price in PLN',
               values: ->(v) { v > 0 },
             )
