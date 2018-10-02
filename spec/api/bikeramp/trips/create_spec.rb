@@ -9,7 +9,7 @@ describe Bikeramp::Trips::Create, type: :request do
     {
       'start_address' => 'Plac Europejski 2, Warszawa, Polska',
       'destination_address' => 'Aleja Jana Pawła II 65, Warszawa, Polska',
-      'price' => 50,
+      'price' => 50.0,
       'date' => date
     }
   end
@@ -20,7 +20,7 @@ describe Bikeramp::Trips::Create, type: :request do
 
   before do
     allow(::TripServices::CreateTrip)
-      .to receive(:call).with(params).and_return(:created)
+      .to receive(:call).with(attributes).and_return(:created)
   end
 
   subject { post endpoint, params: params }
@@ -36,7 +36,7 @@ describe Bikeramp::Trips::Create, type: :request do
 
     it 'runs proper service object' do
       expect(::TripServices::CreateTrip)
-        .to receive(:call).with(params).and_return(:created).once
+        .to receive(:call).with(attributes).and_return(:created).once
       subject
     end
   end

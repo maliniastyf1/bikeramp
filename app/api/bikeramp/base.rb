@@ -6,6 +6,8 @@ module Bikeramp
     content_type :json, 'application/vnd.api+json'
     default_format :json
 
+    helpers Bikeramp::Helpers::ParamsHelpers
+
     mount Bikeramp::Trips::Create
 
     add_swagger_documentation \
