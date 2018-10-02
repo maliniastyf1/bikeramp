@@ -75,6 +75,13 @@ GEM
     dotenv-rails (2.5.0)
       dotenv (= 2.5.0)
       railties (>= 3.2, < 6.0)
+    dry-core (0.4.7)
+      concurrent-ruby (~> 1.0)
+    dry-equalizer (0.2.1)
+    dry-monads (1.0.1)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.4, >= 0.4.4)
+      dry-equalizer
     equalizer (0.0.11)
     erubi (1.7.1)
     factory_bot (4.11.1)
@@ -236,6 +243,7 @@ DEPENDENCIES
   better_errors
   bootsnap (>= 1.1.0)
   dotenv-rails
+  dry-monads
   factory_bot_rails
   ffaker
   grape
