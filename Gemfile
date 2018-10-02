@@ -25,6 +25,7 @@ gem 'hashie-forbidden_attributes' # to make grape params validation work
 gem 'jsonapi-rb'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'pry-rails'
