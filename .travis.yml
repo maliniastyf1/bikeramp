@@ -4,18 +4,25 @@ rvm:
 sudo: false
 cache:
   bundler: true
-
+services:
+  - postgresql
 addons:
-  postgresql: 10.1
-
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rspec spec/
-
+before_install:
+  - sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
+  - sudo service postgresql restart
+  - sleep 1
 before_script:
   - psql -c 'create database bikeramp_test;' -U postgres
-
 env:
   global:
+  - PGPORT=5433
   - secure: jNjTcaHHw+UEz3lMGCJeo0PN9ZybMuTdBrXlb5Xot1Z7giA9NAD6Acg/7ERJYAoYH/JKTuMJko6Om6mSyZ776wXszPnhMcXUAu4eVGSXXwEfN7pTxeUBO5nDZ5hT+wZl6ks43qQ9yl+EChpWSPzwyLsqYB2u8SFVeYPEX3xATeQC2Mg5iF4CRfDuN7XP/iqAWSySCZJT2zRstAu5aYEEQ02fnLFF7wBwdsmVhcMnFtRF8D7gUwq17kfFTYbPKTIM91JmeTXlAHM3q2J34L92MmpmFBnyXg+WWOABgH5YFWdWJMDqMdiSEItQER8L4DtQROGhxUZQ2rV83jbUjTsZ0emc8ogn3/rKJzk52krkmG+SOnelImuA8wDTQ6Kb4CZQ6kvLXYcGDi5z3rIFOYuoOQoqF4oMLWxmO1HCJYfH5OkkXARZMeaLxft/xciraK6gOrJVqPMs57t9ZbB2PUrIkt3FCY9LsqTSZ8gsrZwoTx94crX4evED4fxuqDRjL4DpiHVz7xo7dffV11bt+VTgEDY3zEKAUIeY4vMKwlrkQyv19Wd4CDqh4vY/8lZB2Ch7l3Be3ZHHf/Gv08nhD5QlB4bOg1GU6QnlhPpBrVPGx0Ug5pfceRCGZAXikRFlox7++ZQAI7wMsyMw7up7q/b2Ed3Bmvead5ZCgI2a5P0lQZc=
   - secure: UnFCbu0SHpQVhJy3wfyh321gAvYXZsBMovFNa5239kfU9iAiEmlkCw6tpylJ5CBJs2w3+OHc0qvPZMdQJmGMvQ5IQS5JNe3aavL75wLhS9OXu14jn+6rFn2TLo++Up75CGYcHIig4Z8tnKobF74iywhzZgLna5MEr0UH3iwFEK8fcYZFDPrBaz7fTnfBI0N96o89MxLX4w8VGWEegNm4IDowkr2jLFbBfw6pBghyyy/KHHkr+Hf+kbLQWxEe6m4HAkJb2s0tNP54mh/SgdJND3ruEeTtRENPoeLz2Kgu5CLm5nXaq/ZpdAJEVVuyLJSCDOuKy1Ba734iBdpyMt1qqzX6eLhcou1WS+AhL7EHfeyXoKQpsJRn01qDimIag9aks22fNQrP0SvOFk0IrR/2aDGNii+lV5Fu5hJ/cuWD2YNJFvzb57BExWS4u+x6hJC4kQV3nNoFNyxEOvCh1TAWawW0Rh45G9Dy/hNQg0CYFWPm9Vujbdv06MPmx/LVd1gjprSL762SwIbgPv3Ml7rZ13N3nhgHW2MSP9prC5ixc8cDNdsF5zJOuzg/yShx2KVH3TZwAcV/PNyUubKzg/zRp8nHaocmDDI0uY+id4Bo54vfLm1yBbOvQpIoiulLXeXCyMWXCg/fLMpinqVH2JN9bODTDRgWNlLIgy8a4cGipuc=
