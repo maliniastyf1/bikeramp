@@ -13,7 +13,6 @@ module ExternalServices
       request = yield create_request_url(trip)
       response = yield send_request_to_google(request)
       get_distance_from_response(response)
-
     end
 
     private

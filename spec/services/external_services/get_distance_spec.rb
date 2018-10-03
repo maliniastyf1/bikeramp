@@ -3,7 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe ExternalServices::GetDistance do
-  let(:trip) { create(:trip, destination_address: 'Sokratesa 13, Warszawa, Polska') }
+  let(:date) { Date.new(2018, 10, 3) }
+  let(:trip) do
+    {
+      start_address: 'Plac Europejski 2, Warszawa, Polska',
+      destination_address: 'Sokratesa 13, Warszawa, Polska',
+      price: 50.0,
+      date: date
+
+    }
+  end
   let(:distance) { BigDecimal('9.22') }
 
   subject { described_class.call(trip) }
@@ -39,14 +48,18 @@ RSpec.describe ExternalServices::GetDistance do
   context '#get_distance_from_response' do
     let(:response) do
       {
-        "destination_addresses"=>["Sokratesa 13, 00-001 Warszawa, Poland"],
-        "origin_addresses"=>["plac Europejski 2, 00-844 Warszawa, Poland"],
-        "rows"=>
-        [{"elements"=>
-           [{"distance"=>{"text"=>"5.7 mi", "value"=>9215},
-             "duration"=>{"text"=>"33 mins", "value"=>1990},
-             "status"=>"OK"}]}],
-        "status"=>"OK"
+        'destination_addresses': ['Sokratesa 13, 00-001 Warszawa, Poland'],
+        'origin_addresses': ['plac Europejski 2, 00-844 Warszawa, Poland'],
+        'rows':
+        [{
+          'elements':
+           [{
+             'distance': { 'text': '5.7 mi', 'value': 9215 },
+             'duration': { 'text': '33 mins', 'value': 1990 },
+             'status': 'OK'
+           }]
+        }],
+        'status': 'OK'
       }
     end
 
