@@ -10,7 +10,7 @@ module Bikeramp
         params { use :trip }
 
         post do
-          ::TripServices::CreateTrip.call(attributes(params))
+          TripServices::CreateTrip.call(attributes(params))
 
           status :created
         end

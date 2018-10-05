@@ -9,6 +9,7 @@ module Bikeramp
     helpers Bikeramp::Helpers::ParamsHelpers
 
     mount Bikeramp::Trips::Create
+    mount Bikeramp::Stats::Weekly
 
     add_swagger_documentation \
       mount_path: '/docs',
