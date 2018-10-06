@@ -36,6 +36,7 @@ end
 group :test do
   # shoulda-matchers master branch for Rails5 support
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers'
+  gem 'timecop', '~> 0.9.1'
 end
 
 group :development do
