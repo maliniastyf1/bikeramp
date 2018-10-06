@@ -7,7 +7,7 @@ module Bikeramp
 
       namespace :stats do
         namespace :weekly do
-          before { @stats = StatsServices::PrepareWeeklyStatsReport.call }
+          before { @stats = StatsServices::PrepareWeeklyStatsReport.call.value! }
 
           get do
             @stats

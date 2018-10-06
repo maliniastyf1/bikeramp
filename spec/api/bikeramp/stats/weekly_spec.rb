@@ -5,21 +5,23 @@ require 'rails_helper'
 describe Bikeramp::Stats::Weekly, type: :request do
   let(:endpoint) { '/api/stats/weekly' }
   let(:date) { Date.new(2018, 10, 22) }
-  let(:weekly_stats) do
-    {
-      'total_distance': '40km',
-      'total_price':    '49.75PLN'
-    }
-  end
+  let(:success_object) { Dry::Monads::Result::Success.new(weekly_stats) }
 
   before do
     allow(::StatsServices::PrepareWeeklyStatsReport)
-      .to receive(:call).and_return(weekly_stats)
+      .to receive(:call).and_return(success_object)
   end
 
   subject { get endpoint }
 
   context 'when receives request and service returns proper stats' do
+    let(:weekly_stats) do
+      {
+        'total_distance': '40km',
+        'total_price':    '49.75PLN'
+      }
+    end
+
     it 'responds with 200 and proper body' do
       subject
       expect(response).to have_http_status(:ok)
@@ -28,7 +30,7 @@ describe Bikeramp::Stats::Weekly, type: :request do
 
     it 'runs proper service object' do
       expect(::StatsServices::PrepareWeeklyStatsReport)
-        .to receive(:call).and_return(weekly_stats.to_json).once
+        .to receive(:call).and_return(success_object).once
       subject
     end
   end
@@ -44,7 +46,7 @@ describe Bikeramp::Stats::Weekly, type: :request do
 
     it 'runs proper service object' do
       expect(::StatsServices::PrepareWeeklyStatsReport)
-        .to receive(:call).and_return(weekly_stats.to_json).once
+        .to receive(:call).and_return(success_object).once
       subject
     end
   end
