@@ -13,14 +13,17 @@ RSpec.describe ExternalServices::GetDistance do
 
     }
   end
+
   let(:distance) { BigDecimal('9.22') }
 
   subject { described_class.call(trip) }
 
   context 'when proper attributes are present' do
     it 'gets distance from goole api' do
-      expect(subject.success?).to eq(true)
-      expect(subject.success).to eq(distance)
+      VCR.use_cassette('google/request') do
+        expect(subject.success?).to eq(true)
+        expect(subject.success).to eq(distance)
+      end
     end
   end
 
