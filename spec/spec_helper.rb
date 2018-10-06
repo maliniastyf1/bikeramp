@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'support/vcr_setup'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

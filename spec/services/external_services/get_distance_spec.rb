@@ -20,10 +20,10 @@ RSpec.describe ExternalServices::GetDistance do
 
   context 'when proper attributes are present' do
     it 'gets distance from goole api' do
-       VCR.use_cassette('google/request') do
-         expect(subject.success?).to eq(true)
-         expect(subject.success).to eq(distance)
-       end
+      VCR.use_cassette('google/request') do
+        expect(subject.success?).to eq(true)
+        expect(subject.success).to eq(distance)
+      end
     end
   end
 
