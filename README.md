@@ -1,25 +1,15 @@
-# README
+## bikeramp
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version 2.5.1
 
-Things you may want to cover:
+* Rails version 5.2.1
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
+* To send requests to google API:
+  - create account on https://developers.google.com/maps/documentation/distance-matrix/start
+  - add GOOGLE_API_KEY to your .env file
 
 * Database creation
+  - rails db:setup
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# bikeramp
+* Testing endpoints with swagger
+  - http://localhost:3000/swagger
