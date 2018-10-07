@@ -18,9 +18,7 @@ module StatsServices
 
     def trips_within_range(date_range)
       Success(
-        Trip.select do |trip|
-          trip.date >= date_range.start_date && trip.date <= date_range.end_date
-        end,
+        Trip.select { |trip| trip.date >= date_range.start_date && trip.date <= date_range.end_date },
       )
     end
 
