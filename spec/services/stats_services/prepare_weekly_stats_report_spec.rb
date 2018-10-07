@@ -70,4 +70,30 @@ RSpec.describe StatsServices::PrepareWeeklyStatsReport do
       expect(subject.success[:total_price]).to eq('0.00PLN')
     end
   end
+
+  context '#total_distance' do
+    let(:weekly_trips) { [trip_1, trip_2] }
+
+    subject { described_class.new.send(:total_distance, weekly_trips) }
+
+    shared_examples 'sum of distance' do
+      it 'returns sum of distance' do
+        expect(subject).to eq(distance)
+      end
+    end
+
+    context 'when trips have distance' do
+      let(:distance) { 40 }
+
+      include_examples 'sum of distance'
+    end
+
+    context 'when one trip do not have distance' do
+      let(:trip_without_distance) { create(:trip, distance: nil, date: date_2) }
+      let(:weekly_trips) { [trip_1, trip_without_distance] }
+      let(:distance) { 20 }
+
+      include_examples 'sum of distance'
+    end
+  end
 end

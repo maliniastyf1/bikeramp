@@ -30,15 +30,19 @@ module StatsServices
     end
 
     def total_distance_from_rides(weekly_stats)
+      return '0km' if weekly_stats.blank?
+
       "#{total_distance(weekly_stats)}km"
     end
 
     def total_price_from_rides(weekly_stats)
+      return '0.00PLN' if weekly_stats.blank?
+
       "#{number_with_precision(total_price(weekly_stats), precision: 2)}PLN"
     end
 
     def total_distance(weekly_stats)
-      weekly_stats.map(&:distance).reduce(0) { |total, distance| total + distance }.to_i
+      weekly_stats.map(&:distance).compact.reduce(0) { |total, distance| total + distance }.to_i
     end
 
     def total_price(weekly_stats)
