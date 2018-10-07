@@ -10,28 +10,24 @@ RSpec.describe StatsServices::PrepareMonthlyStatsReport do
   let!(:trip_1) do
     create(
       :trip,
-      destination_address: 'Sokratesa 13, Warszawa, Polska',
       date: date,
     )
   end
   let!(:trip_2) do
     create(
       :trip,
-      destination_address: 'Sokratesa 13, Warszawa, Polska',
       date: date,
     )
   end
   let!(:trip_3) do
     create(
       :trip,
-      destination_address: 'Sokratesa 13, Warszawa, Polska',
       date: date_2,
     )
   end
   let!(:trip_4) do
     create(
       :trip,
-      destination_address: 'Sokratesa 13, Warszawa, Polska',
       date: date_3,
     )
   end
