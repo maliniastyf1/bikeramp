@@ -23,7 +23,7 @@ module StatsServices
     end
 
     def collection_of_daily_reports(trips)
-      trips.each_with_object([]) { |day, arr| arr << daily_stats_from_trips(day) }
+      trips.sort.each_with_object([]) { |day, arr| arr << daily_stats_from_trips(day) }
     end
 
     def daily_stats_from_trips(day)
